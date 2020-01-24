@@ -67,14 +67,14 @@ window.renderStatistics = function (ctx, players, times) {
     var playerX = CLOUD_X + BAR_MARGIN + (BAR_MARGIN + BAR_WIDTH) * i;
     var playerBarHeight = (BAR_HEIGHT * times[i]) / maxTime;
     var playerBarY = BAR_HEIGHT - playerBarHeight + TEXT_HEIGHT + TEXT_HEADING_Y + TEXT_HEADING_GAP * 2 + CLOUD_Y;
-    var playerTimeValue = Math.floor(times[i]);
+    var playerTime = Math.floor(times[i]);
     var playerTimeY = playerBarY - TEXT_HEIGHT;
 
     if (players[i] === 'Вы') {
       playerBarColor = BAR_COLOR_YOUR;
     }
 
-    renderText(ctx, playerX, playerTimeY, playerTimeValue, TEXT_FONT, TEXT_COLOR);
+    renderText(ctx, playerX, playerTimeY, playerTime, TEXT_FONT, TEXT_COLOR);
     renderText(ctx, playerX, playerNameY, players[i], TEXT_FONT, TEXT_COLOR);
     renderBar(ctx, playerX, playerBarY, BAR_WIDTH, playerBarHeight, playerBarColor);
   }
