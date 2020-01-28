@@ -1,15 +1,11 @@
 'use strict';
 
-var HIDDEN_CLASS = 'hidden';
-var USER_DIALOG = document.querySelector('.setup');
-var SIMILAR_LIST_ELEMENT = USER_DIALOG.querySelector('.setup-similar-list');
-var SIMILAR_WIZARD_TEMPLATE = document.querySelector('#similar-wizard-template')
+var userDialog = document.querySelector('.setup');
+var similarListElement = userDialog.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
-var SIMILAR_SETUP = USER_DIALOG.querySelector('.setup-similar');
-var SIMILAR_LABEL = '.setup-similar-label';
-var WIZARD_COAT = '.wizard-coat';
-var WIZARD_EYES = '.wizard-eyes';
+var similarSetup = userDialog.querySelector('.setup-similar');
 var NUMBER_OF_WIZARD = 4;
 var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -20,40 +16,46 @@ var getRandomItem = function (array) {
   return array[Math.floor(Math.random() * array.length)];
 };
 
-var getRandomWizard = function (names, surnames, coat, eyes) {
-  var object = {};
-  object.name = getRandomItem(names) + ' ' + getRandomItem(surnames);
-  object.coatColor = getRandomItem(coat);
-  object.eyesColor = getRandomItem(eyes);
-  return object;
+var generateRandomWizard = function (names, surnames, coats, eyes) {
+  var wizard = {};
+
+  wizard.name = getRandomItem(names) + ' ' + getRandomItem(surnames);
+  wizard.coatColor = getRandomItem(coats);
+  wizard.eyesColor = getRandomItem(eyes);
+
+  return wizard;
 };
 
-var renderWizard = function (wizard) {
-  var wizardElement = SIMILAR_WIZARD_TEMPLATE.cloneNode(true);
+var createWizardElement = function (wizard) {
+  var wizardElement = similarWizardTemplate.cloneNode(true);
 
-  wizardElement.querySelector(SIMILAR_LABEL).textContent = wizard.name;
-  wizardElement.querySelector(WIZARD_COAT).style.fill = wizard.coatColor;
-  wizardElement.querySelector(WIZARD_EYES).style.fill = wizard.eyesColor;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
 
   return wizardElement;
 };
 
-var renderSimilarWizardTable = function () {
+var createArrayOfWizards = function (names, surnames, coats, eyes, number) {
   var wizards = [];
 
-  for (var i = 0; i < NUMBER_OF_WIZARD; i++) {
-    wizards.push(getRandomWizard(NAMES, SURNAMES, COAT_COLORS, EYES_COLORS));
+  for (var i = 0; i < number; i++) {
+    wizards.push(generateRandomWizard(names, surnames, coats, eyes));
   }
 
-  var fragment = document.createDocumentFragment();
-
-  for (i = 0; i < wizards.length; i++) {
-    fragment.appendChild(renderWizard(wizards[i]));
-  }
-
-  SIMILAR_LIST_ELEMENT.appendChild(fragment);
-  USER_DIALOG.classList.remove(HIDDEN_CLASS);
-  SIMILAR_SETUP.classList.remove(HIDDEN_CLASS);
+  return wizards;
 };
 
-renderSimilarWizardTable();
+var createTableOfWizards = function (wizards) {
+  var fragment = document.createDocumentFragment();
+
+  for (var i = 0; i < wizards.length; i++) {
+    fragment.appendChild(createWizardElement(wizards[i]));
+  }
+
+  similarListElement.appendChild(fragment);
+  userDialog.classList.remove('hidden');
+  similarSetup.classList.remove('hidden');
+};
+
+createTableOfWizards(createArrayOfWizards(NAMES, SURNAMES, COAT_COLORS, EYES_COLORS, NUMBER_OF_WIZARD));
