@@ -21,7 +21,9 @@ var setupWizard = userDialog.querySelector('.setup-wizard');
 var wizardCoat = setupWizard.querySelector('.wizard-coat');
 var wizardEyes = setupWizard.querySelector('.wizard-eyes');
 var fireball = userDialog.querySelector('.setup-fireball-wrap');
-var fireballHiddenInput = fireball.querySelector('input');
+var fireballHiddenInput = fireball.querySelector('input[name="fireball-color"]');
+var coatColorHiddenInput = userDialog.querySelector('input[name="coat-color"]');
+var eyesColorHiddenInput = userDialog.querySelector('input[name="eyes-color"]');
 
 var getRandomItem = function (array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -75,16 +77,18 @@ var hideElementDOM = function (element) {
   element.classList.add('hidden');
 };
 
-var changeElementColor = function (element, colors) {
-  element.style.fill = getRandomItem(colors);
+var changeElementColor = function (element, colors, input) {
+  var newColor = getRandomItem(colors);
+  element.style.fill = newColor;
+  input.value = newColor;
 };
 
 var onClickWizardCoat = function () {
-  changeElementColor(wizardCoat, COAT_COLORS);
+  changeElementColor(wizardCoat, COAT_COLORS, coatColorHiddenInput)
 };
 
 var onClickWizardEyes = function () {
-  changeElementColor(wizardEyes, EYES_COLORS);
+  changeElementColor(wizardEyes, EYES_COLORS, eyesColorHiddenInput);
 };
 
 var onClickFireball = function () {
