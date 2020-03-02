@@ -84,7 +84,7 @@ var changeElementColor = function (element, colors, input) {
 };
 
 var onClickWizardCoat = function () {
-  changeElementColor(wizardCoat, COAT_COLORS, coatColorHiddenInput)
+  changeElementColor(wizardCoat, COAT_COLORS, coatColorHiddenInput);
 };
 
 var onClickWizardEyes = function () {
