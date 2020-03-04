@@ -4,7 +4,8 @@
   var NUMBER_OF_WIZARD = 4;
   var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
   var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-  var similarListElement = document.querySelector('.setup-similar-list');
+  var similarSetup = document.querySelector('.setup-similar');
+  var similarListElement = similarSetup.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
@@ -50,4 +51,5 @@
   };
 
   similarListElement.appendChild(createTableOfWizards(createArrayOfWizards(NUMBER_OF_WIZARD)));
+  window.util.showElementDOM(similarSetup);
 })();
