@@ -5,6 +5,10 @@
   var setupCloseButton = window.setup.userDialog.querySelector('.setup-close');
   var setupUserName = window.setup.userDialog.querySelector('.setup-user-name');
   var dialogHandler = window.setup.userDialog.querySelector('.upload');
+  var defaultDialogCoords = {
+    y: window.setup.userDialog.style.top,
+    x: window.setup.userDialog.style.left
+  };
 
   var onClickOpenButton = function () {
     window.util.showElementDOM(window.setup.userDialog);
@@ -34,8 +38,8 @@
     window.setup.wizardEyes.removeEventListener('click', window.setup.onClickWizardEyes);
     window.setup.fireball.removeEventListener('click', window.setup.onClickFireball);
     dialogHandler.removeEventListener('mousedown', onDialogMove);
-    window.setup.userDialog.style.top = '80px';
-    window.setup.userDialog.style.left = '50%';
+    window.setup.userDialog.style.top = defaultDialogCoords.y;
+    window.setup.userDialog.style.left = defaultDialogCoords.x;
   };
 
   var onPopupEscPress = function (evt) {
