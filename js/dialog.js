@@ -34,6 +34,8 @@
     window.setup.wizardEyes.removeEventListener('click', window.setup.onClickWizardEyes);
     window.setup.fireball.removeEventListener('click', window.setup.onClickFireball);
     dialogHandler.removeEventListener('mousedown', onDialogMove);
+    window.setup.userDialog.style.top = '80px';
+    window.setup.userDialog.style.left = '50%';
   };
 
   var onPopupEscPress = function (evt) {
